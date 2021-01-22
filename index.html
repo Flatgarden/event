@@ -14,7 +14,7 @@
     <img id="image" src="image.png" width="100%" style="position: absolute;" />
     <svg width="100%" viewBox="0 0 375 3628" fill="none" xmlns="http://www.w3.org/2000/svg"
         style="position: absolute; z-index: 1px;">
-        <a onclick="getEventFish20()">
+        <a>
             <g filter="url(#filter0_d)">
                 <rect x="27" y="3127" width="320" height="65.303" rx="20" fill="#FFC700" />
                 <path
@@ -50,27 +50,13 @@
     </svg>
 
     <script>
-        let Authorization
-
-        function getEventFish(Auth) { Authorization = Auth }
-
-        function getEventFish20() {
-            axios.post('https://dev.hakhak.io/graphql', {
-                query: `mutation getEventFish20 {
-                            getEventFish20
-                        }`,
-            }, {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': Authorization,
-                    'Access-Control-Allow-Headers': '*'
-                }
-            }).then((res) => {
-                console.log(res.data)
-                if (res.data.errors) alert(res.data.errors[0].message + '번')
-                else alert('생선이 지급되었습니다!')
-            })
-        }
+        const a = document.querySelector('a')
+        a.setAttribute('onclick', null)
+        a.addEventListener('click', function () {
+            if (window.App && window.App.postMessage) {
+                App.postMessage('free fish');
+            }
+        }, false)
     </script>
 
 </body>
